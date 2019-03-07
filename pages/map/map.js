@@ -4,6 +4,39 @@ Page({
   /**
    * 页面的初始数据
    * [{29.5989837961,106.3221645355},{29.6070994930,106.3306725025},{29.5804924943,106.4765739441},{29.5992263437,106.5284693241}]
+   * 
+   * 
+   * [{
+        iconPath: '../imgs/map_dark.png',
+        id: 0,
+        latitude: 29.5989837961,
+        longitude: 106.3221645355,
+        width: 20,
+        height: 20
+      }, {
+        iconPath: '../imgs/map_dark.png',
+        id: 1,
+        latitude: 29.6070994930,
+        longitude: 106.3306725025,
+        width: 20,
+        height: 20
+      }, {
+        iconPath: '../imgs/map_dark.png',
+        id: 2,
+        latitude: 29.5804924943,
+        longitude: 106.4765739441,
+        width: 20,
+        height: 20
+      }, {
+        iconPath: '../imgs/map_dark.png',
+        id: 3,
+        latitude: 29.5992263437,
+        longitude: 106.5284693241,
+        width: 20,
+        height: 20
+      }]
+   * 
+   * 
    */
   data: {
     mapCtx:'',
@@ -15,35 +48,7 @@ Page({
       positions:[],
       tips:''
     },
-    markers: [{
-      iconPath: '../imgs/map_dark.png',
-      id: '0',
-      latitude: 29.5989837961,
-      longitude: 106.3221645355,
-      width: 20,
-      height: 20
-    },{
-        iconPath: '../imgs/map_dark.png',
-      id: '1',
-      latitude: 29.6070994930,
-      longitude: 106.3306725025,
-      width: 20,
-      height: 20
-      }, {
-        iconPath: '../imgs/map_dark.png',
-        id: '2',
-        latitude: 29.5804924943,
-        longitude: 106.4765739441,
-        width: 20,
-        height: 20
-      },{
-        iconPath: '../imgs/map_dark.png',
-      id: '2',
-      latitude: 29.5992263437,
-      longitude: 106.5284693241,
-      width: 20,
-      height: 20
-    }],
+    markers: [],
     polyline: [{
       points: [
         {latitude: 29.5989837961,longitude: 106.3221645355},
@@ -97,29 +102,43 @@ Page({
   onLoad: function (options) {
     // this.getLocations()
     console.log('------ Map--onLoad')
-    console.log(options)
+
     // 拿到坐标信息
     var positions = options.positon.split(';');
     console.dir(positions)
     console.dir(positions[0])
     var coordinates = [];
     let coordinate = {};
+    
+    let markList = [];
     for(var i in positions){
-      coordinate.longitude = positions[i].split(',')[0];
+      coordinate.longitude = positions[i].split(',')[1];
       coordinate.latitude = positions[i].split(',')[0];
-      coordinates.push(coordinate)
+      coordinates.push(coordinate);
+
+      let markObj = {
+        iconPath: '../imgs/map_dark.png',
+        id: i,
+        latitude: positions[i].split(',')[1],
+        longitude: positions[i].split(',')[0],
+        width: 20,
+        height: 20
+      };      
+      markList.push(markObj);
+      
     }
     // 标记点、画线
     this.setData({
-      // currlatitude: latitude,
-      // currlongitude: longitude,
+      markers: markList,
       drivierInfo: {
         name: options.name,
         phone: options.phone,
         positions: coordinates,
         tips: options.tips
       }
-    })       
+    })
+    console.log('load里面setdata成功')
+    console.log(this.data.markers);     
   },
   
   //点击事件--联系TA
