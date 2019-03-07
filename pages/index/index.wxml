@@ -1,0 +1,21 @@
+<!--index.wxml-->
+<view class="container">
+  <view class='top'>
+    <image src='../imgs/sgl.jpg'></image>
+    <text>时光里邻居帮-——-上班拼车</text>
+    <view class='des'>
+      <text>小区搭车信息共享、互帮互助、方便你我他</text>
+    </view>
+  </view>
+  <view class='content'>
+    <button id='coustomer' bindtap='toList' type='primary' plain='true'>查看搭车信息</button>
+    <button id='driver' bindtap='toList' type='primary' plain='true'>查看司机行程</button>
+    <button id='driver' bindtap='toPublish' type='primary' plain='true'>去发布行程</button>
+  </view>
+  <view class='bottom'>
+    <text>关于时光里-邻居帮</text>
+    <view>
+      还没有想好写点啥，就这样吧！哈哈哈
+    </view>
+  </view>
+</view>

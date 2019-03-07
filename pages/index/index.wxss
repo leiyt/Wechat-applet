@@ -1,0 +1,36 @@
+/**index.wxss**/
+.top{
+  width: 100%;
+  padding: 20rpx;
+  margin-bottom: 30rpx;
+  box-sizing: border-box;
+  text-align: center;
+}
+.top image{
+  width: 100%;
+}
+.top text{
+  line-height: 2em;
+  color: #666;
+}
+.des{
+  font-size: 35rpx;
+}
+.content{
+  text-align: center;
+}
+.content button[type=primary][plain]{
+  margin: 30rpx 50rpx;
+  color: #fff;
+  background-color: rgb(6, 136, 60);
+}
+.bottom{
+  margin-top: 60rpx;
+  padding: 30rpx;
+  text-align: center;
+  color: #666;
+  font-size: 35rpx;
+}
+.bottom text{
+  line-height: 2em;
+}

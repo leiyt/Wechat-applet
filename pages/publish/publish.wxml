@@ -1,0 +1,14 @@
+<!--pages/publish/publish.wxml-->
+<view class="container">
+  <view class='title'>发布行程</view>
+  <view>    
+    <button type='primary' size='mini' plain='true' bindtap='getLocation' id='start'>选择出发地点</button>
+    <button type='primary' size='mini' plain='true' bindtap='getLocation' id='pass'>添加途径地点</button>
+    <button type='primary' size='mini' plain='true' bindtap='getLocation' id='end'>选择到达地点</button>
+    <view class='map_box'>
+      <text>你选择的地址：</text>
+      <map id="mymap" longitude="{{currlongitude}}" latitude="{{currlatitude}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;" >
+    </map>
+    </view>
+  </view>
+</view>

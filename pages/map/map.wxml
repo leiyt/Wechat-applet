@@ -1,0 +1,20 @@
+<!--pages/map/map.wxml-->
+<view class='map_title'>
+  <text>司机路线标记</text>
+</view>
+<view class="container">
+  <view>
+    <map id="map" longitude="{{currlongitude}}" latitude="{{currlatitude}}" scale="14" controls="{{controls}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" polyline="{{polyline}}" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;" >
+    </map>
+  </view>  
+  
+  <view class='info_box'>
+    <view>
+      <text>{{drivierInfo.name}} —— {{drivierInfo.tips}}</text>
+    </view>
+    <view>
+      <text>电话：{{drivierInfo.phone}}</text>
+      <button type='primary' size='mini' plain='true' id="{{drivierInfo.phone}}" bindtap='call'>联系TA</button>
+    </view>    
+  </view>
+</view>

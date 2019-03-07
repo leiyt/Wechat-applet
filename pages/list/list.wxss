@@ -1,0 +1,63 @@
+/* pages/list/list.wxss */
+.title{
+  text-align: center;
+  padding: 20rpx;
+  background-color: #f0f0f0;
+  color: #666;  
+}
+.list{
+  padding: 0 30rpx;
+  height: 100%;
+  overflow-y: auto;
+}
+.list_item{
+  margin: 30rpx 0;
+  border-radius: 20rpx;
+  color: #666;
+  overflow: hidden;
+}
+.item_name{
+  padding: 15rpx;
+  background-color: rgb(6, 136, 60);
+  color: #fff;
+  font-size: 35rpx;
+}
+.item_name>image{
+  width: 60rpx;
+  height: 60rpx;
+  background-color: #fff;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  margin-right: 30rpx;
+  vertical-align: middle;
+}
+.item_content{
+  padding: 30rpx;
+  background-color: #fafafa;
+  font-size: 33rpx;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+.item_content text{
+  display: inline-block;
+  width: 120rpx;
+}
+.item_content view+view{
+  margin-top: 30rpx;
+}
+.item_content button{
+  margin-right: 20rpx;
+}
+.float_btn{
+  padding: 10rpx;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+.float_btn button[type=primary][plain] {
+  padding: 0 30rpx;
+  color: #fff;
+  background-color: rgba(6, 136, 60, 0.65);
+}
