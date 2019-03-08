@@ -1,42 +1,9 @@
 // pages/map/map.js
+
 Page({
 
   /**
    * 页面的初始数据
-   * [{29.5989837961,106.3221645355},{29.6070994930,106.3306725025},{29.5804924943,106.4765739441},{29.5992263437,106.5284693241}]
-   * 
-   * 
-   * [{
-        iconPath: '../imgs/map_dark.png',
-        id: 0,
-        latitude: 29.5989837961,
-        longitude: 106.3221645355,
-        width: 20,
-        height: 20
-      }, {
-        iconPath: '../imgs/map_dark.png',
-        id: 1,
-        latitude: 29.6070994930,
-        longitude: 106.3306725025,
-        width: 20,
-        height: 20
-      }, {
-        iconPath: '../imgs/map_dark.png',
-        id: 2,
-        latitude: 29.5804924943,
-        longitude: 106.4765739441,
-        width: 20,
-        height: 20
-      }, {
-        iconPath: '../imgs/map_dark.png',
-        id: 3,
-        latitude: 29.5992263437,
-        longitude: 106.5284693241,
-        width: 20,
-        height: 20
-      }]
-   * 
-   * 
    */
   data: {
     mapCtx:'',
@@ -51,10 +18,11 @@ Page({
     markers: [],
     polyline: [{
       points: [
-        {latitude: 29.5989837961,longitude: 106.3221645355},
-        {latitude: 29.6070994930,longitude: 106.3306725025},
-        {latitude: 29.5804924943,longitude: 106.4765739441}
-        ],
+      {latitude: 29.5989837961,longitude: 106.3221645355},
+      {latitude: 29.6070994930,longitude: 106.3306725025},
+      {latitude: 29.5855868036, longitude: 106.4681625366},
+      {latitude: 29.5992263437, longitude: 106.5284693241}
+      ],
       color: '#FF0000DD',
       width: 3,
       dottedLine: true
@@ -95,6 +63,12 @@ Page({
       }
     });
   },
+  //点击事件--联系TA
+  call: function (event) {
+    wx.makePhoneCall({
+      phoneNumber: event.target.id
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -111,6 +85,8 @@ Page({
     let coordinate = {};
     
     let markList = [];
+    let pointList = [];
+
     for(var i in positions){
       coordinate.longitude = positions[i].split(',')[1];
       coordinate.latitude = positions[i].split(',')[0];
@@ -118,18 +94,24 @@ Page({
 
       let markObj = {
         iconPath: '../imgs/map_dark.png',
-        id: i,
+        id: i+2,
         latitude: positions[i].split(',')[1],
         longitude: positions[i].split(',')[0],
         width: 20,
         height: 20
       };      
       markList.push(markObj);
-      
+      pointList.push({ latitude: positions[i].split(',')[1], longitude: positions[i].split(',')[0]})      
     }
     // 标记点、画线
     this.setData({
       markers: markList,
+      polyline: [{
+        points: pointList,
+        color: '#FF0000DD',
+        width: 3,
+        dottedLine: true
+      }],
       drivierInfo: {
         name: options.name,
         phone: options.phone,
@@ -141,13 +123,7 @@ Page({
     console.log(this.data.markers);     
   },
   
-  //点击事件--联系TA
-  call: function(event){
-    wx.makePhoneCall({
-      phoneNumber: event.target.id
-    })
-  },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

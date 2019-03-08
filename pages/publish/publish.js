@@ -17,6 +17,13 @@ Page({
     polyline:[]
 
   },
+  //点击事件--提交、重置表单
+  formSubmit(e) {
+    console.log('form发生了submit事件，携带数据为：', e.detail.value)
+  },
+  formReset() {
+    console.log('form发生了reset事件')
+  },
   //点击事件--获取位置
   getLocation: function(event){
     console.log('获取位置------')
@@ -71,9 +78,15 @@ Page({
           })
         }else if(flag == 'pass'){
           let index = that.data.markers.length;
+          let newPassList = that.data.passPosition;
+          newPassList.push(address);
+          console.log(newPassList)
+          
           that.setData({
-            passPosition: passPosition.push(address)
+            passPosition: newPassList
           })
+          console.log("途经地点添加")
+          console.log(that.data.passPosition)
         }
         // // 缩放地图以显示所有标记点
         // let selPoints = []

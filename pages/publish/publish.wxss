@@ -1,1 +1,50 @@
 /* pages/publish/publish.wxss */
+.container{
+  padding: 15rpx;
+}
+.title{
+  background-color: #f0f0f0;
+  padding: 15rpx;
+  text-align: center;
+}
+.items{
+  padding: 30rpx 0;
+  font-size: 35rpx;
+  color: #666;
+}
+.section{
+  padding: 15rpx;
+  border-bottom: 1px solid #f0f0f0;
+}
+.flex_box{
+  display: flex;  
+  min-height: 2em;
+}
+.section>input{
+  flex: 1;
+  text-align:center;
+}
+.section__title{
+  width: 7em;
+  line-height: 2em;
+}
+.section button[type=primary][plain] {
+  color:rgb(6, 136, 60);
+  border-color:#ddd;
+  background-color: #fafafa;
+}
+.section>text{
+  display: block;
+  line-height: 1.8em;
+  font-size: 30rpx;
+  color:#999;
+}
+
+.btn-area button[type=primary][plain]{
+  margin: 30rpx 50rpx;
+  color: #fff;
+  background-color: rgb(6, 136, 60);
+}
+.map_box{
+  margin: 30rpx auto;
+}
