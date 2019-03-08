@@ -3,34 +3,37 @@
   <view class='title'>发布行程</view>
   <view class='items'>
     <form bindsubmit="formSubmit" bindreset="formReset">   
-      <view class="section">
-        <radio-group name="radio-group" class="flex_box">
-          <label>
-            <radio value="driver" color="rgb(6, 136, 60)" />我是司机
-          </label>
-          <label>
-            <radio value="coustomer" color="rgb(6, 136, 60)" />我是乘客
-          </label>
-        </radio-group>
+      <view class="section flex_box">
+        <view class="section__title"><text class='red_txt'>*</text>发布对象</view>
+        <view class='flex_item'>
+          <radio-group name="radio-group" class="flex_box" bindchange="changeType">
+            <label>
+              <radio value="driver" color="rgb(6, 136, 60)" />司机
+            </label>
+            <label>
+              <radio value="coustomer" color="rgb(6, 136, 60)" />乘客
+            </label>
+          </radio-group>
+        </view>         
       </view> 
       <view class="section flex_box">
-        <view class="section__title">您的称呼：</view>
-        <input name="input" placeholder="请输入您的称呼" />
+        <view class="section__title"><text class='red_txt'>*</text>您的称呼：</view>
+        <input bindinput="inputNname"  placeholder="请输入您的称呼" maxlength="10"/>
       </view>
       <view class="section flex_box">
-        <view class="section__title">您的电话：</view>
-        <input name="input" placeholder="请输入您的电话" />
+        <view class="section__title"><text class='red_txt'>*</text>您的手机号：</view>
+        <input type='number' bindinput="inputPhone" placeholder="请输入您的电话" maxlength="11"/>
       </view>
       <view class="section">
         <view class='flex_box'>
-          <view class="section__title">选择出发地点：</view>
+          <view class="section__title"><text class='red_txt'>*</text>选择出发地点：</view>
           <button type='primary' size='mini' plain='true' bindtap='getLocation' id='start'>选择出发地点</button>
         </view>        
         <text>{{ startPosition.name }}</text>
       </view>
       <view class="section">
         <view class='flex_box'>
-          <view class="section__title">选择到达地点：</view>
+          <view class="section__title"><text class='red_txt'>*</text>选择到达地点：</view>
           <button type='primary' size='mini' plain='true' bindtap='getLocation' id='end'>选择到达地点</button>
         </view>          
         <text>{{ endPosition.name }}</text>
@@ -43,18 +46,21 @@
         <text wx:for="{{passPosition}}" wx:key="index">途经{{index+1}}：{{ item.name }}</text>
       </view>
 
+      <view class="section flex_box">
+        <view class="section__title"><text class='red_txt'>*</text>时间：</view>
+        <input bindinput="inputTime"  placeholder="请输入时间" maxlength="20"/>
+      </view>
+      <view class="section flex_box">
+        <view class="section__title">备注：</view>
+        <input bindinput="inputTips"  placeholder="请输入备注" maxlength="20"/>
+      </view>
+
       <view class="btn-area">
         <button form-type="submit" type='primary' plain='true' bindtap='publish'>发布</button>
         <!-- <button form-type="reset">Reset</button> -->
       </view>
     </form>
   </view>
-  
-  <!-- <view class='btn_box'>    
-    <button type='primary' size='mini' plain='true' bindtap='getLocation' id='start'>选择出发地点</button>
-    <button type='primary' size='mini' plain='true' bindtap='getLocation' id='pass'>添加途经地点</button>
-    <button type='primary' size='mini' plain='true' bindtap='getLocation' id='end'>选择到达地点</button>    
-  </view> -->
 
   <view class='map_box'>
     <map id="mymap" longitude="{{currlongitude}}" latitude="{{currlatitude}}" bindcontroltap="controltap" markers="{{markers}}" bindmarkertap="markertap" scale="14" bindregionchange="regionchange" show-location style="width: 100%; height: 300px;" ></map>

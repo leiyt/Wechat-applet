@@ -14,8 +14,12 @@ Page({
     passPosition:[],
     endPosition:{},
     markers: [],
-    polyline:[]
-
+    polyline:[],
+    usertype:'',
+    username:'',
+    phone:'',
+    time:'',
+    tips:''
   },
   //点击事件--提交、重置表单
   formSubmit(e) {
@@ -24,10 +28,121 @@ Page({
   formReset() {
     console.log('form发生了reset事件')
   },
+  //选择乘客 or 司机
+  changeType: function(event){
+    this.setData({
+      usertype: event.detail.value
+    })
+    console.log('选择乘客还是司机：' + event.detail.value)
+    console.log(event)
+  },
+  // 输入昵称
+  inputNname(e) {
+    this.setData({
+      username: e.detail.value
+    })
+  },
+  // 输入手机号
+  inputPhone(e) {
+    this.setData({
+      phone: e.detail.value
+    })
+  },
+  // 输入时间
+  inputTime(e) {
+    this.setData({
+      time: e.detail.value
+    })
+  },
+  // 输入备注
+  inputTips(e) {
+    this.setData({
+      tips: e.detail.value
+    })
+  },
   // 发布按钮
   publish:function(event){
+    var _this = this;
+    //检测必填字段
+    if (_this.data.usertype == ''){
+      wx.showToast({
+        title: '请选择发布对象',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+    if (_this.data.username == '') {
+      wx.showToast({
+        title: '请输入您的称呼',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+    if (_this.data.phone == '') {
+      wx.showToast({
+        title: '请输入您的手机号',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+    // 电话号码正则验证
+    if (!_this.data.startPosition.name) {
+      wx.showToast({
+        title: '请选择出发地点',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+    if (!_this.data.endPosition.name) {
+      wx.showToast({
+        title: '请选择目的地',
+        icon: 'success',
+        duration: 2000
+      })
+      return;
+    } 
+    if (_this.data.time == '') {
+      wx.showToast({
+        title: '请输入时间',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
+    
+    // 处理发布信息并写入缓存
+    var positionList = [];
+    //起点坐标放入数组
+    positionList.push([_this.data.startPosition.longitude, _this.data.startPosition.latitude].join(','))
+    // 途经坐标放入数组
+    if (_this.data.passPosition.length>0){
+      for (var i in _this.data.passPosition){
+        positionList.push([_this.data.passPosition[i].longitude, _this.data.passPosition[i].latitude].join(','))
+      }
+    }
+    // 终点坐标放入数组
+    positionList.push([_this.data.endPosition.longitude, _this.data.endPosition.latitude].join(','))
+    // 组装发布数据
+    var publishData = {
+      name: _this.data.username,
+      phone: _this.data.phone,
+      travel: _this.data.startPosition.name + '--' + _this.data.endPosition.name,
+      time: _this.data.time,
+      tips: _this.data.tips,
+      position: positionList
+    }
+    // 写入缓存
+    wx.setStorage({
+      key: 'publishTest',
+      data: JSON.stringify(publishData)
+    })
+
     wx.showToast({
-      title: '发布成功--测试',
+      title: '发布成功',
       icon: 'success',
       duration: 2000,
       success: function(res){
@@ -35,19 +150,16 @@ Page({
       },
       complete: function(res){
         wx.navigateTo({
-          url: '../list/list?type=driver',
+          url: '../list/list?type=' + _this.data.usertype,
         })
       }
     })
   },
   //点击事件--获取位置
   getLocation: function(event){
-    console.log('获取位置------')
-
-    // console.log(this.data.startName)
-    var flag = event.target.id;
+    var flag = event.target.id
     var that = this;
-    // name: '时光里',address: '重庆市沙坪坝区大学城南路12号',latitude: 29.5989837961,longitude: 106.3221645355
+
     wx.chooseLocation({
       type: 'wgs84',
       success: function (res) {
@@ -104,20 +216,6 @@ Page({
           console.log("途经地点添加")
           console.log(that.data.passPosition)
         }
-        // // 缩放地图以显示所有标记点
-        // let selPoints = []
-        // for (var i in that.data.markers){
-        //   let selPoint ={
-        //     latitude: that.data.markers[i].latitude,
-        //     longitude: that.data.markers[i].longitude,
-        //   }
-        //   selPoints.push(selPoint)
-        // }
-        // that.mapCtx.includePoints({
-        //   padding: [10],
-        //   points: selPoints
-        // })
-        
       },
       fail: function () {
         // fail

@@ -25,7 +25,8 @@ Page({
     title: '',
     type:'',
     coustomer: coustomerData,
-    driver: driverData
+    driver: driverData,
+    publishData: {}
   },
   // 点击事件--查看路线
   toMap: function(event){
@@ -50,18 +51,69 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    //获取缓存数据
+    var _this = this
+    wx.getStorage({
+      key: 'publishTest',
+      success(res) {
+        console.log('读取缓存数据')
+        console.log(res.data)
+        // 把数据push到渲染列表
+        _this.setData({
+          publishData: JSON.parse(res.data)                    
+        })
+      }
+    })
+    try {
+      const value = wx.getStorageSync('key')
+      if (value) {
+        if (options.type && options.type == 'coustomer') {
+          let oldData = _this.data.publishData
+          let addData = _this.data.publishData
+          console.log('乘客列表')
+          console.log(oldData)
+
+          _this.setData({
+            coustomer: oldData.push(addData)
+          })
+        } else if (options.type && options.type == 'driver') {
+          let oldData = _this.data.driver
+          let addData = _this.data.publishData
+          console.log('司机列表')
+          console.log(oldData)
+
+          _this.setData({
+            driver: oldData.push(addData)
+          })
+        }
+      }
+    } catch (e) {
+      // Do something when catch error
+    }
+
     if (options.type && options.type =='coustomer'){
-      this.setData({
+      // let oldData = _this.data.publishData
+      // let addData = _this.data.publishData
+      // console.log('乘客列表')
+      // console.log(oldData)
+
+      _this.setData({
         type: 'coustomer',
-        title: '乘客搭车列表'
+        title: '乘客搭车列表',
+        // coustomer: oldData.push(addData)
       })
     } else if (options.type && options.type == 'driver'){
-      this.setData({
+      // let oldData = _this.data.driver
+      // let addData = _this.data.publishData
+      // console.log('司机列表')
+      // console.log(oldData)
+
+      _this.setData({
         type: 'driver',
-        title: '司机行程列表'
+        title: '司机行程列表',
+        // driver: oldData.push(addData)
       })
     }
-    
   },
 
   /**
