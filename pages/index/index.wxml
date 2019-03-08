@@ -10,7 +10,7 @@
   <view class='content'>
     <button id='coustomer' bindtap='toList' type='primary' plain='true'>查看搭车信息</button>
     <button id='driver' bindtap='toList' type='primary' plain='true'>查看司机行程</button>
-    <button id='driver' bindtap='toPublish' type='primary' plain='true'>去发布行程</button>
+    <button bindtap='toPublish' type='primary' plain='true'>去发布行程</button>
   </view>
   <view class='bottom'>
     <text>关于时光里-邻居帮</text>

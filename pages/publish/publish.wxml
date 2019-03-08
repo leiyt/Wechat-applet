@@ -2,7 +2,17 @@
 <view class="container publish">
   <view class='title'>发布行程</view>
   <view class='items'>
-    <form bindsubmit="formSubmit" bindreset="formReset">    
+    <form bindsubmit="formSubmit" bindreset="formReset">   
+      <view class="section">
+        <radio-group name="radio-group" class="flex_box">
+          <label>
+            <radio value="driver" color="rgb(6, 136, 60)" />我是司机
+          </label>
+          <label>
+            <radio value="coustomer" color="rgb(6, 136, 60)" />我是乘客
+          </label>
+        </radio-group>
+      </view> 
       <view class="section flex_box">
         <view class="section__title">您的称呼：</view>
         <input name="input" placeholder="请输入您的称呼" />
@@ -34,7 +44,7 @@
       </view>
 
       <view class="btn-area">
-        <button form-type="submit" type='primary' plain='true'>发布</button>
+        <button form-type="submit" type='primary' plain='true' bindtap='publish'>发布</button>
         <!-- <button form-type="reset">Reset</button> -->
       </view>
     </form>

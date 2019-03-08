@@ -10,7 +10,7 @@ Page({
   //事件处理函数
   toList: function (event) {
     wx.navigateTo({
-      url: '../list/list?type=' + event.currentTarget.id
+      url: '../list/list?type=' + event.target.id
     })
   },
   toPublish: function(){

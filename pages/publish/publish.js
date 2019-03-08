@@ -24,6 +24,22 @@ Page({
   formReset() {
     console.log('form发生了reset事件')
   },
+  // 发布按钮
+  publish:function(event){
+    wx.showToast({
+      title: '发布成功--测试',
+      icon: 'success',
+      duration: 2000,
+      success: function(res){
+        
+      },
+      complete: function(res){
+        wx.navigateTo({
+          url: '../list/list?type=driver',
+        })
+      }
+    })
+  },
   //点击事件--获取位置
   getLocation: function(event){
     console.log('获取位置------')
