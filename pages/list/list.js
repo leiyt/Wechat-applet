@@ -47,16 +47,24 @@ Page({
     var _this = this
     
     if (options.type && options.type =='coustomer'){
-      let addData = JSON.parse(wx.getStorageSync('coustomerData'));
-      coustomerData.push(addData)
+      let addData = {};
+      if (wx.getStorageSync('coustomerData')){
+        addData = JSON.parse(wx.getStorageSync('coustomerData'));
+        coustomerData.unshift(addData)
+      }
+      
       _this.setData({
         type: 'coustomer',
         title: '乘客搭车列表',
         list: coustomerData
       })
     } else if (options.type && options.type == 'driver'){
-      let addData = JSON.parse(wx.getStorageSync('driverData'));
-      driverData.push(addData)
+      let addData = {};
+      if (wx.getStorageSync('driverData')) {
+        addData = JSON.parse(wx.getStorageSync('driverData'));
+        driverData.unshift(addData)
+      }
+            
       _this.setData({
         type: 'driver',
         title: '司机行程列表',

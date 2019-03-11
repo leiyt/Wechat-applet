@@ -13,7 +13,7 @@
         <view><text>行程：</text>{{ item.travel }}</view>
         <view><text>时间：</text>{{ item.time }}</view>
         <view><text>电话：</text>{{ item.phone }}</view>
-        <view><text>备注：</text>{{ item.tips }}</view>      
+        <view><text>备注：</text>{{ item.tips }}</view>
         <view>
           <button type='primary' size='mini' plain='true' id='{{item.phone}}' bindtap='call'>联系TA</button>
           <button type='primary' size='mini' plain='true' data-positon="{{item.position}}" data-phone="{{item.phone}}" data-tips="{{item.tips}}"  data-name="{{item.name}} "bindtap='toMap' wx:if="{{type=='driver'}}"> 查看途经路线</button>
