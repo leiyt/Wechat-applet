@@ -89,6 +89,14 @@ Page({
       return;
     }
     // 电话号码正则验证
+    if (!(/^1[34578]\d{9}$/.test(_this.data.phone))){
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'none',
+        duration: 2000
+      })
+      return;
+    }
     if (!_this.data.startPosition.name) {
       wx.showToast({
         title: '请选择出发地点',
@@ -136,10 +144,18 @@ Page({
       position: positionList
     }
     // 写入缓存
-    wx.setStorage({
-      key: 'publishTest',
-      data: JSON.stringify(publishData)
-    })
+    if (_this.data.usertype =='driver'){
+      wx.setStorage({
+        key: 'driverData',
+        data: JSON.stringify(publishData)
+      })
+    } else if (_this.data.usertype == 'coustomer'){
+      wx.setStorage({
+        key: 'coustomerData',
+        data: JSON.stringify(publishData)
+      })
+    }
+    
 
     wx.showToast({
       title: '发布成功',

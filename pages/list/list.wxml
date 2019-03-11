@@ -1,24 +1,28 @@
 <!--pages/coustomer/coustomer.wxml-->
 <view>
-  <view class='list' wx:if="{{type=='coustomer'}}">
+  <view class='list'>
     <view class="title">{{ title }}</view>
-    <view class='list_item' wx:for="{{coustomer}}" wx:key="{{index}}">
-      <view class='item_name'>
+    <view class='list_item' wx:for="{{list}}" wx:key="{{index}}">
+      <view class='item_name' wx:if="{{type=='coustomer'}}">
         <image src="../imgs/girl.png"></image>{{ item.name }}
+      </view>
+      <view class='item_name' wx:elif="{{type=='driver'}}">
+        <image src="../imgs/people.png"></image>司机 — {{ item.name }}
       </view>
       <view class='item_content'>
         <view><text>行程：</text>{{ item.travel }}</view>
         <view><text>时间：</text>{{ item.time }}</view>
-        <view><text>电话：</text>{{ item.phone }}</view>        
+        <view><text>电话：</text>{{ item.phone }}</view>
         <view><text>备注：</text>{{ item.tips }}</view>      
         <view>
           <button type='primary' size='mini' plain='true' id='{{item.phone}}' bindtap='call'>联系TA</button>
+          <button type='primary' size='mini' plain='true' data-positon="{{item.position}}" data-phone="{{item.phone}}" data-tips="{{item.tips}}"  data-name="{{item.name}} "bindtap='toMap' wx:if="{{type=='driver'}}"> 查看途经路线</button>
         </view>
       </view>
     </view>
   </view>
   
-  <view class='list' wx:elif="{{type=='driver'}}">
+  <!-- <view class='list' wx:elif="{{type=='driver'}}">
     <view class="title">{{ title }}</view>
     <view class='list_item' wx:for="{{ driver }}" wx:key="{{index}}">
       <view class='item_name'>
@@ -35,7 +39,7 @@
         </view>
       </view>
     </view>
-  </view>
+  </view> -->
 
   <view class='float_btn'>
     <button type='primary' size='mini' plain='true' bindtap='toPublish'>去发布</button>
