@@ -92,14 +92,15 @@ Page({
    */
   onHide: function () {
     // 页面关闭时清空缓存
-
+    wx.clearStorage()
+    wx.clearStorageSync()
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
-
+    wx.clearStorageSync()
   },
 
   /**
