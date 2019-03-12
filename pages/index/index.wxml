@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
   <view class='top'>
-    <image src='../imgs/sgl.jpg'></image>
+    <view class='img_box'><image src='../imgs/sgl.jpg'></image></view>
     <text>时光里邻居帮-——-上班拼车</text>
     <view class='des'>
       <text>小区搭车信息共享、互帮互助、方便你我他</text>

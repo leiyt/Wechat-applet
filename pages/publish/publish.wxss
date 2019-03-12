@@ -61,6 +61,6 @@
   margin: 50rpx auto;
   border: 1px solid #ddd;
 }
-.red_txt{
+.section__title .red_txt{
   color: #FF0000DD;
 }
